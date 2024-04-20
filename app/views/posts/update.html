@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}Postagem {{ user.user_account }}{% endblock %}
+
+{% block css %} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div>
+        <p class="text-center"><img src="{{ post.post_mediapath + post.post_filename }}" class="height=100% width=100%" style="max-height: 400px; max-width: 1000px; object-fit: cover;"></p>
+    </div>
+    <form action={{ url_for('posts_routes.update', user_account=user.user_account, post_id=post.id) }} method="post" id="formatualizar" name="formatualizar">
+    <div>
+        <p class="text-center"><textarea name="description" id="description" rows="4" class="form-control">{{ post.post_description }}</textarea></p>
+    </div>
+    <div class="text-center"> 
+        {% if current_user.id == user.id %} 
+        <p class="text-center">
+        <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#apagarModal"role="button">Atualizar</a></p>
+        {% endif %}
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="apagarModal" tabindex="-1" aria-labelledby="apagarModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Deseja atualizar o post?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" id="submit" name="submit" class="btn btn-secondary" value="Atualizar">Atualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
+{% block js %}
+<script src={{ url_for('static', filename='js/jquery-3.7.0.min.js') }}></script>>
+<script>
+    $('#submit').click(function(){
+        $('#formatualizar').submit();
+    });
+</script>
+{% endblock %}

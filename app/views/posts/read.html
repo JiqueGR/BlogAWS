@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}Postagem {{ user.user_account }}{% endblock %}
+
+{% block css %} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div>
+        <p class="text-center"><img src="{{ post.post_mediapath + post.post_filename }}" class="height=100% width=100%" style="max-height: 300px; max-width: 1000px; object-fit: cover;"></p>
+    </div>
+    <div>
+        <p class="text-center">{{ post.post_description }}</p>
+    </div>
+    <div class="text-center"> 
+        {% if current_user.id == user.id %} 
+        <a class="btn btn-primary" href="{{ url_for('posts_routes.update', user_account=user.user_account, post_id=post.id) }}" role="button">Editar</a>
+        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#apagarModal" role="button">Excluir</a>
+        {% endif %}
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="apagarModal" tabindex="-1" aria-labelledby="apagarModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Deseja excluir o post?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <a class="btn btn-danger" href="{{ url_for('posts_routes.delete', user_account=user.user_account, post_id=post.id) }}">Excluir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %} {% endblock %}

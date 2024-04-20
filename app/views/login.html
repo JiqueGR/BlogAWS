@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login no fotoblog</title>
+    <link href={{  url_for('static',filename='css/bootstrap.min.css') }} rel="stylesheet">
+    <link href={{  url_for('static',filename='css/login.css') }} rel="stylesheet">
+  </head>
+
+<html
+<body class="text-center">
+    <form class="form-signin" method="POST" action={{ url_for('app_routes.login')}}>
+      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+      <label for="inputEmail" class="sr-only">E-mail</label>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+      <label for="inputPassword" class="sr-only">Senha</label>
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="*******" required>
+      <!-- <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div> -->
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entre</button>
+      <p class="mt-5 mb-3 text-muted">Ainda não tem uma conta? <a href={{ url_for('users_routes.create')}}>Cadastre-se</a></p>
+    </form>
+  </body>
+</html>
